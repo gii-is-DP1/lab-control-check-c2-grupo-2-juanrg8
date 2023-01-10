@@ -10,8 +10,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class CareFormatter implements Formatter<Care>{
 
+    
+    private CareService service;
+
     @Autowired
-    private CareService careService;
+    public CareFormatter(CareService service) {
+        this.service = service;
+    }
 
     @Override
     public String print(Care object, Locale locale) {
@@ -20,11 +25,9 @@ public class CareFormatter implements Formatter<Care>{
 
     @Override
     public Care parse(String text, Locale locale) throws ParseException {
-        Care cr = careService.getCare(text);
-        if (cr == null) {
-            throw new ParseException("Product type not found: " + text, 0);
-        }
-        return cr;
+        Care care = service.getCare(text);
+        if (care == null) throw new ParseException("Care not found",0);
+        return care;
     }
     
 }

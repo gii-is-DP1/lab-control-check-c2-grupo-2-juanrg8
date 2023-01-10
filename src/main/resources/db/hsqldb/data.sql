@@ -63,7 +63,20 @@ INSERT INTO visits(id,pet_id,visit_date,description) VALUES (3, 8, '2013-01-03',
 INSERT INTO visits(id,pet_id,visit_date,description) VALUES (4, 7, '2013-01-04', 'spayed');
 
 
-INSERT INTO care(id,name,care_duration) VALUES (1,'Hair cut', 30), (2,'Exotic shampoo cleaning', 15);
-INSERT INTO care_provision(id,visit_id,user_rating,care_id) VALUES (1,1,'Care rated with 8 stars',1), (2,2,'Care rated with 9 stars, I am quite happy!',2);
+INSERT INTO care(id, name, care_duration) VALUES
+    (1,'Hair cut',30),
+    (2, 'Exotic shampoo cleaning',15);
 
-INSERT INTO cares_type VALUES (1,2),(1,6),(2,6),(2,1);
+INSERT INTO care_compatible_pet_types(care_id,compatible_pet_types_id) VALUES
+    (1,2),
+    (1,6),
+    (2,6),
+    (2,1);
+
+INSERT INTO care_provision(id, visit_id, user_rating, care_id) VALUES
+    (1, 1, 'Care rated with 8 stars', 1),
+    (2,2,'Care rated with 9 stars, I am quite happy!',2);
+
+INSERT INTO care_incompatible_cares(care_id, incompatible_cares_id) VALUES
+    (1,2),
+    (2,1);

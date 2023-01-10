@@ -1,10 +1,14 @@
 package org.springframework.samples.petclinic.care;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
@@ -26,21 +30,26 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name = "care")
-public class Care extends BaseEntity{
+ 
+public class Care {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     @Size(min = 3, max = 40)
-    @NotBlank
-    @Column(name = "name", unique = true)
+    @NotEmpty
+    @Column(unique = true)
     String name;
 
     @Min(1)
-    @Max(121)
+    @Max(120)
     int careDuration;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @NotEmpty
-    @JoinTable(name = "cares_type", joinColumns = @JoinColumn(name = "care_id"),
-			inverseJoinColumns = @JoinColumn(name = "type_id"))
     Set<PetType> compatiblePetTypes;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    Set<Care> incompatibleCares;
 }
