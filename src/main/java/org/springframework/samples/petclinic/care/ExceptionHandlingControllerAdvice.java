@@ -4,11 +4,12 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-
+// TEST 10 
 @ControllerAdvice
 public class ExceptionHandlingControllerAdvice {
-    
+	
+    @ExceptionHandler({UnfeasibleCareException.class, NonCompatibleCaresException.class})
 	public String handleInvalidCareException(HttpServletRequest request, Exception ex){		
-		return null;
+		return "cares/InvalidCare";
 	}
 }

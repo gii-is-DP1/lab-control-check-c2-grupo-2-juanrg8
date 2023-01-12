@@ -9,39 +9,48 @@ import org.springframework.samples.petclinic.pet.PetType;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
+// TEST 4 
 @Service
 public class CareService {    
 
-    @Autowired
+    @Autowired //Esto puede dar problema
     CareProvisionRepository cpr;
     public List<Care> getAllCares(){
         return null;
     }
-    
+    // TEST 7 
     public List<Care> getAllCompatibleCares(PetType petTypeName, Care additionalCareName){
-        return null;
+        return cpr.findCompatibleCares(petTypeName, additionalCareName);
     }
     
     public Care getCare(String careName) {
-        return null;
+        return cpr.findCareByName(careName);
     }
-    
-    public CareProvision save(CareProvision p) throws NonCompatibleCaresException, UnfeasibleCareException {        
-        return null;   
+    // TEST 8
+    @Transactional(rollbackFor = {NonCompatibleCaresException.class, UnfeasibleCareException.class})
+    public CareProvision save(CareProvision p) throws NonCompatibleCaresException, UnfeasibleCareException {
+        List<CareProvision> caresProvided = cpr.findCaresProvidedByVisitId(p.getVisit().getId());
+        Care care = p.getCare();
+        if(caresProvided.stream().anyMatch(provided->care.getIncompatibleCares().contains(provided.getCare()))) {
+            throw new NonCompatibleCaresException();
+        }
+
+        if(!care.getCompatiblePetTypes().contains(p.getVisit().getPet().getType()))
+            throw new UnfeasibleCareException();
+        return cpr.save(p);
     }
 
     public List<CareProvision> getAllCaresProvided(){
-        return null;
+        return cpr.findAll();
     }
 
     public List<CareProvision> getCaresProvidedInVisitById(Integer visitId){
-        return null;
+        return cpr.findCaresProvidedByVisitId(visitId);
 
     }
- 
+    // TEST 9 
     public Page<CareProvision> getPaginatedCareProvisions(Pageable pageable){
-        return null;
+        return cpr.findAllPaginatedCareProvisions(pageable);
     }
 
 }
