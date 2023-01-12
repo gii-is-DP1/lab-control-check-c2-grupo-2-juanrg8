@@ -9,7 +9,7 @@ import org.springframework.samples.petclinic.pet.PetType;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
+// TEST 4 
 @Service
 public class CareService {    
 
@@ -18,7 +18,7 @@ public class CareService {
     public List<Care> getAllCares(){
         return null;
     }
-    
+    // TEST 7 
     public List<Care> getAllCompatibleCares(PetType petTypeName, Care additionalCareName){
         return cpr.findCompatibleCares(petTypeName, additionalCareName);
     }
@@ -26,7 +26,7 @@ public class CareService {
     public Care getCare(String careName) {
         return cpr.findCareByName(careName);
     }
-    
+    // TEST 8
     @Transactional(rollbackFor = {NonCompatibleCaresException.class, UnfeasibleCareException.class})
     public CareProvision save(CareProvision p) throws NonCompatibleCaresException, UnfeasibleCareException {
         List<CareProvision> caresProvided = cpr.findCaresProvidedByVisitId(p.getVisit().getId());
@@ -48,7 +48,7 @@ public class CareService {
         return cpr.findCaresProvidedByVisitId(visitId);
 
     }
- 
+    // TEST 9 
     public Page<CareProvision> getPaginatedCareProvisions(Pageable pageable){
         return cpr.findAllPaginatedCareProvisions(pageable);
     }

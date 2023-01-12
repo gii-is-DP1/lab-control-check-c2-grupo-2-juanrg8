@@ -27,6 +27,7 @@ import org.springframework.samples.petclinic.pet.PetType;
 import lombok.Getter;
 import lombok.Setter;
 
+// TEST 1 
 @Entity
 @Getter
 @Setter
@@ -50,6 +51,7 @@ public class Care {
     @NotEmpty
     Set<PetType> compatiblePetTypes;
 
+    // TEST 6 
     @ManyToMany(cascade = CascadeType.ALL)
     Set<Care> incompatibleCares;
 }

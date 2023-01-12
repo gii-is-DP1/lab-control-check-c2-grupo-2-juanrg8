@@ -10,7 +10,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.samples.petclinic.pet.PetType;
 import org.springframework.stereotype.Repository;
-
+// TEST 2
 @Repository
 public interface CareProvisionRepository extends CrudRepository<CareProvision, Integer>{
     List<CareProvision> findAll();        

@@ -62,7 +62,7 @@ INSERT INTO visits(id,pet_id,visit_date,description) VALUES (2, 8, '2013-01-02',
 INSERT INTO visits(id,pet_id,visit_date,description) VALUES (3, 8, '2013-01-03', 'neutered');
 INSERT INTO visits(id,pet_id,visit_date,description) VALUES (4, 7, '2013-01-04', 'spayed');
 
-
+-- TEST 3 CUIDADO CON ESTA PARTE QUE PUEDE ESTROPEAR TODOS LOS TEST
 INSERT INTO care(id, name, care_duration) VALUES
     (1,'Hair cut',30),
     (2, 'Exotic shampoo cleaning',15);
